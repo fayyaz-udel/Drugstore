@@ -1,0 +1,48 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+{%if user.is_superuser == 0 %}
+<meta http-equiv="refresh" content="0; URL=/"/>
+{% endif %}
+
+<div class="w3-container w3-center w3-pale-blue w3-section w3-round-xlarge">
+    <h3>Employees</h3>
+    <hr>
+    <table id='main_table' class="display w3-table w3-light-gray w3-border w3-bordered">
+        <thead>
+        <tr class="w3-red">
+            <th>No.</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>SuperUser</th>
+            <th>Unpaid Hours</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in entries reversed %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ item.user.first_name }}</td>
+            <td>{{ item.user.last_name }}</td>
+            <td>{{ item.user.email }}</td>
+            <td>{{ item.user.is_superuser |yesno:"✔,✘" }}</td>
+            <td>{{ item.total_hours |floatformat }}</td>
+
+
+            <td>
+                <form method="get" action="/{{item.user.id}}/user_delete">
+                    <button class="w3-button w3-red w3-round-xlarge">Delete</button>
+                </form>
+            </td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

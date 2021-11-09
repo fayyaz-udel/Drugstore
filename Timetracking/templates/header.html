@@ -1,0 +1,101 @@
+<html>
+<title>Angle Care Pharmacy</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1, h2, h3, h4, h5, h6 {font-family: "Times New Roman", Times, serif; font-weight: bold;}
+
+
+</style>
+<body style="background-size: 100%; background-image: url('https://s4.uupload.ir/files/dreamstime_xxl_62549323_-_copy_515h.jpg')">
+
+
+{%if user.is_authenticated %}
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+
+
+    <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome, <strong>{{user.first_name}} {{user.last_name}}</strong></p>
+    <hr>
+    <a href="/" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>  Home</a>
+    {%if user.is_superuser == 1 %}
+    <a href="/user" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>  Users</a>
+    {% endif %}
+    <a href="/logs" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bar-chart fa-fw"></i>  Reports</a>
+    <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw"></i>  Log Out</a>
+    <hr>
+    <button class="w3-bar-item w3-button w3-large"
+            onclick="w3_close()">Close &times;
+    </button>
+</div>
+{%endif %}
+<div id="main">
+
+    <div class="w3-deep-orange w3-cell-row">
+
+
+        <div class="w3-cell-row">
+            <div class="w3-third w3-container">
+                {%if user.is_authenticated %}
+                <button id="openNav" class="w3-button w3-deep-orange w3-xlarge" onclick="w3_open()">&#9776;</button>
+                {%endif %}
+            </div>
+
+
+            <div class="w3-third w3-container">
+                <h2 class="w3-center">Angle Care Pharmacy</h2>
+
+            </div>
+
+            <div class="w3-third w3-container">
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="w3-container">
+
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+
+$(document).ready( function () {
+    $('#main_table').DataTable();
+} );
+</script>
+
+</body>
+<script>
+$(document).ready( function () {
+    $('#main_table').DataTable();
+} );
+</script>
+</html>

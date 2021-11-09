@@ -1,0 +1,36 @@
+{% extends 'header.html' %}
+
+{% block content %}
+{% if form.errors %}
+<div class="w3-panel w3-red">
+    <h3>Alert!</h3>
+    <p>Your username and password didn't match. Please try again.</p>
+</div>
+{% endif %}
+
+{%if user.is_authenticated %}
+<meta http-equiv="refresh" content="0; URL=/"/>
+{% endif %}
+
+
+<div align="center" class="w3-panel w3-light-blue w3-padding-32 w3-display-middle w3-round-xlarge">
+
+    <form method="POST">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <th>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ form.username }}</th>
+            </tr>
+            <tr>
+                <th>Password: {{ form.password }}</th>
+            </tr>
+        </table>
+        <button class="w3-button w3-red w3-round-xxlarge">Sign in</button>
+    </form>
+
+    Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>!
+
+</div>
+
+
+{% endblock %}
