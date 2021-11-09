@@ -40,7 +40,7 @@ def log_delete_request(request, id):
 
 @login_required
 def log_pay_request(request, id):
-    obj = get_object_or_404(Log, id=id, user=request.user)
+    obj = get_object_or_404(Log, id=id)
     if obj.paid is False:
         obj.paid = True
         obj.pay_dateTime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
